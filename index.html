@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Bachman — Product Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1923;
+    --paper: #f5f0e8;
+    --accent: #c8421a;
+    --accent2: #1a3a5c;
+    --mid: #7a8a9a;
+    --rule: #d8cfc0;
+    --card-bg: #ffffff;
+    --tag-bg: #e8e2d8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(120px, 18vw, 240px);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--rule);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translateY(-50%) translateX(0); }
+    to { transform: translateY(-48%) translateX(20px); }
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 32px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 560px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s forwards;
+  }
+
+  .hero-stat { }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    color: var(--accent2);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-divider {
+    width: 1px;
+    background: var(--rule);
+    align-self: stretch;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION WRAPPER */
+  section {
+    padding: 96px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 700px;
+    margin-bottom: 64px;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--accent2);
+    color: white;
+  }
+
+  .about .section-label { color: #a8c4e0; }
+  .about .section-title { color: white; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #c0d0e0;
+  }
+
+  .about-text p + p { margin-top: 20px; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .skill-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #d0e0f0;
+    letter-spacing: 0.02em;
+  }
+
+  .skill-pill strong {
+    display: block;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    color: #a8c4e0;
+  }
+
+  /* PROJECTS */
+  .projects { background: var(--paper); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 64px rgba(15,25,35,0.12);
+  }
+
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  /* Project mockup area */
+  .project-visual {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    background: #0f1923;
+  }
+
+  .project-card.featured .project-visual {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  /* SVG mockups */
+  .mockup-dashboard {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #0f1923 0%, #1a2d42 100%);
+  }
+
+  .mockup-chatbot {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .mockup-workflow {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .mockup-app {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .project-body {
+    padding: 32px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: #fdf0eb;
+    border: 1px solid #f0c8ba;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .tag.blue {
+    color: var(--accent2);
+    background: #eaf0f8;
+    border-color: #b8cce0;
+  }
+
+  .tag.gray {
+    color: var(--mid);
+    background: var(--tag-bg);
+    border-color: var(--rule);
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .project-org {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .project-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4a5a6a;
+  }
+
+  .project-outcomes {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    gap: 32px;
+  }
+
+  .outcome-stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .outcome-stat .label {
+    font-size: 12px;
+    color: var(--mid);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* PROCESS SECTION */
+  .process { background: #f0ebe0; }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .process-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--accent2);
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .process-step:hover .step-num {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .step-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--mid);
+  }
+
+  /* PHILOSOPHY / QUOTE */
+  .philosophy {
+    background: var(--ink);
+    text-align: center;
+    padding: 120px 48px;
+  }
+
+  .philosophy blockquote {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.3;
+    color: white;
+    max-width: 860px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+
+  .philosophy blockquote em { color: var(--accent); font-style: italic; }
+
+  .philosophy cite {
+    display: block;
+    margin-top: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-style: normal;
+  }
+
+  /* CONTACT / FOOTER */
+  .contact {
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    padding: 80px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .contact-left .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .contact-left h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: right;
+  }
+
+  .contact-links a {
+    font-size: 15px;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .contact-links a:hover { color: var(--accent); }
+
+  .cta-btn {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 16px 36px;
+    background: var(--accent);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: #a8361a;
+    transform: translateY(-2px);
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,25,35,0.85);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: 16px;
+    max-width: 760px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 48px;
+    position: relative;
+    animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: var(--rule); color: var(--ink); }
+
+  .modal-tag { margin-bottom: 16px; }
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .modal-org {
+    font-size: 14px;
+    color: var(--mid);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .modal-section-head {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  .modal-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #3a4a5a;
+  }
+  .modal-body ul {
+    margin-top: 8px;
+    padding-left: 20px;
+  }
+  .modal-body ul li { margin-bottom: 8px; }
+
+  .modal-outcomes {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+    padding: 24px;
+    background: var(--paper);
+    border-radius: 8px;
+  }
+
+  .modal-outcome-stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .modal-outcome-stat .label {
+    font-size: 12px;
+    color: var(--mid);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    section { padding: 64px 24px; }
+    .hero { padding: 0 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .process-steps::before { display: none; }
+    .contact { flex-direction: column; gap: 40px; align-items: flex-start; }
+    .contact-links { text-align: left; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Matt Bachman</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">PRODUCT</div>
+  <p class="hero-eyebrow">Associate Product Manager · Portfolio</p>
+  <h1 class="hero-title">Building <em>AI-powered</em> products that actually get used.</h1>
+  <p class="hero-sub">5+ years shipping enterprise solutions across 6,000-user environments — where the hard part is never the technology, it's the people, the process, and the proof.</p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <div class="hero-stat-num">6K+</div>
+      <div class="hero-stat-label">Users Served</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4</div>
+      <div class="hero-stat-label">AI Implementations Led</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">80%</div>
+      <div class="hero-stat-label">Efficiency Gain Roadmapped</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5+</div>
+      <div class="hero-stat-label">Years Enterprise SaaS</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">From implementation to insight — then into product.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Most APMs come in having studied product. I came in having built it — deploying AI workflows at the NFL, designing chatbot architectures at Evercore, and briefing the Commissioner and C-suite on platform strategy in the same week.</p>
+      <p>That practitioner's lens shapes how I approach product work. I've sat in every seat at the table — the engineer troubleshooting an integration, the trainer driving adoption, the analyst building the dashboard that changes leadership's mind. That's a distinct advantage when it comes to writing requirements, validating features, and knowing where solutions break down before they ship.</p>
+      <p>I'm now moving deliberately into product management, with a focus on data and AI solutions in media and entertainment — environments where the technical complexity is high and the business stakes are even higher.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-pill"><strong>Product</strong>Requirements · Roadmaps · UAT · Prioritization</div>
+      <div class="skill-pill"><strong>AI & Automation</strong>Copilot Studio · ServiceNow VA · Power Automate</div>
+      <div class="skill-pill"><strong>Delivery</strong>Agile/Scrum · Sprint Planning · Backlog Mgmt</div>
+      <div class="skill-pill"><strong>Data</strong>Dashboards · KPI Tracking · Analytics · Python</div>
+      <div class="skill-pill"><strong>Stakeholders</strong>C-suite · Engineering · Cross-functional</div>
+      <div class="skill-pill"><strong>Governance</strong>AI policy · Compliance · Privacy frameworks</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <p class="section-label">Case Studies</p>
+  <h2 class="section-title">Five projects. Five different problems. One approach.</h2>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED: NFL Copilot Integration -->
+    <div class="project-card featured" onclick="openModal('copilot')">
+      <div class="project-visual">
+        <div class="mockup-dashboard">
+          <svg width="100%" height="100%" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dashboard mockup -->
+            <rect x="0" y="0" width="520" height="320" fill="#0d1b2a" rx="8"/>
+            <!-- Sidebar -->
+            <rect x="0" y="0" width="100" height="320" fill="#0a1520" rx="8 0 0 8"/>
+            <rect x="12" y="20" width="76" height="8" fill="#1a3a5c" rx="4"/>
+            <rect x="12" y="44" width="56" height="6" fill="#1a3050" rx="3"/>
+            <rect x="12" y="64" width="64" height="6" fill="#243560" rx="3"/>
+            <rect x="12" y="84" width="50" height="6" fill="#1a3050" rx="3"/>
+            <circle cx="20" cy="120" r="6" fill="#c8421a"/>
+            <rect x="32" y="116" width="48" height="8" fill="#c8421a" rx="3"/>
+            <rect x="12" y="144" width="60" height="6" fill="#1a3050" rx="3"/>
+            <rect x="12" y="164" width="52" height="6" fill="#1a3050" rx="3"/>
+            <!-- Main area header -->
+            <rect x="116" y="20" width="180" height="10" fill="#2a4a6a" rx="4"/>
+            <rect x="116" y="38" width="120" height="6" fill="#1a3050" rx="3"/>
+            <!-- KPI cards -->
+            <rect x="116" y="60" width="88" height="64" fill="#1a2d42" rx="6"/>
+            <text x="160" y="88" fill="#c8421a" font-size="22" font-weight="bold" text-anchor="middle" font-family="serif">6K+</text>
+            <rect x="130" y="100" width="60" height="6" fill="#1a4060" rx="3"/>
+            <rect x="216" y="60" width="88" height="64" fill="#1a2d42" rx="6"/>
+            <text x="260" y="88" fill="#4a9a6a" font-size="22" font-weight="bold" text-anchor="middle" font-family="serif">↑ 94%</text>
+            <rect x="228" y="100" width="60" height="6" fill="#1a4060" rx="3"/>
+            <rect x="316" y="60" width="88" height="64" fill="#1a2d42" rx="6"/>
+            <text x="360" y="88" fill="#a8c4e0" font-size="22" font-weight="bold" text-anchor="middle" font-family="serif">1.2s</text>
+            <rect x="326" y="100" width="60" height="6" fill="#1a4060" rx="3"/>
+            <!-- Chart area -->
+            <rect x="116" y="140" width="288" height="100" fill="#1a2d42" rx="6"/>
+            <rect x="130" y="152" width="80" height="6" fill="#2a4060" rx="3"/>
+            <!-- Bar chart bars -->
+            <rect x="134" y="206" width="20" height="24" fill="#1a4a7a" rx="2"/>
+            <rect x="162" y="195" width="20" height="35" fill="#1a4a7a" rx="2"/>
+            <rect x="190" y="180" width="20" height="50" fill="#2a5a9a" rx="2"/>
+            <rect x="218" y="190" width="20" height="40" fill="#2a5a9a" rx="2"/>
+            <rect x="246" y="175" width="20" height="55" fill="#3a6aaa" rx="2"/>
+            <rect x="274" y="165" width="20" height="65" fill="#c8421a" rx="2"/>
+            <rect x="302" y="175" width="20" height="55" fill="#3a6aaa" rx="2"/>
+            <rect x="330" y="180" width="20" height="50" fill="#2a5a9a" rx="2"/>
+            <!-- Right panel -->
+            <rect x="416" y="60" width="88" height="180" fill="#1a2d42" rx="6"/>
+            <rect x="426" y="72" width="68" height="6" fill="#2a4060" rx="3"/>
+            <rect x="426" y="88" width="55" height="5" fill="#1a3050" rx="2"/>
+            <rect x="426" y="100" width="62" height="5" fill="#1a3050" rx="2"/>
+            <rect x="426" y="112" width="48" height="5" fill="#1a3050" rx="2"/>
+            <!-- Donut placeholder -->
+            <circle cx="460" cy="168" r="28" fill="none" stroke="#1a4060" stroke-width="14"/>
+            <circle cx="460" cy="168" r="28" fill="none" stroke="#c8421a" stroke-width="14" stroke-dasharray="88 88" stroke-dashoffset="22"/>
+            <text x="460" y="173" fill="white" font-size="11" text-anchor="middle" font-weight="bold">82%</text>
+            <!-- Blinking cursor effect region -->
+            <rect x="116" y="252" width="288" height="30" fill="#112030" rx="4"/>
+            <rect x="126" y="260" width="4" height="14" fill="#c8421a" rx="1" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.1;0.9" dur="1.2s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="135" y="263" width="60" height="5" fill="#2a4060" rx="2"/>
+            <rect x="200" y="263" width="80" height="5" fill="#2a4060" rx="2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Featured</span>
+          <span class="tag blue">AI Integration</span>
+          <span class="tag blue">Agile Delivery</span>
+          <span class="tag gray">ServiceNow + Copilot</span>
+        </div>
+        <h3 class="project-title">Enterprise AI Workflow</h3>
+        <p class="project-org">NFL · 6,000+ Users</p>
+        <p class="project-desc">Led the development of a Microsoft Copilot virtual agent powered by Generative AI for the NFL's enterprise environment — from requirements scoping through stakeholder training. Managed Agile delivery with cross-functional teams, resolved conflicts mid-sprint, and drove adoption across both technical and non-technical users.</p>
+        <div class="project-outcomes">
+          <div class="outcome-stat"><div class="num">6K+</div><div class="label">Users impacted</div></div>
+          <div class="outcome-stat"><div class="num">↓ Manual</div><div class="label">Effort enterprise-wide</div></div>
+          <div class="outcome-stat"><div class="num">Full lifecycle</div><div class="label">Discovery to go-live</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Support Model -->
+    <div class="project-card" onclick="openModal('litera')">
+      <div class="project-visual">
+        <div class="mockup-workflow">
+          <svg width="100%" height="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#0d1b2a" rx="8"/>
+            <circle cx="36" cy="90" r="22" fill="#1a2d42" stroke="#c8421a" stroke-width="2"/>
+            <text x="36" y="86" fill="#c8421a" font-size="8" text-anchor="middle" font-weight="bold">RISK</text>
+            <text x="36" y="97" fill="#c8421a" font-size="8" text-anchor="middle">ID</text>
+            <line x1="58" y1="90" x2="78" y2="90" stroke="#2a4060" stroke-width="1.5"/>
+            <circle cx="100" cy="90" r="22" fill="#1a2d42" stroke="#2a5a8a" stroke-width="2"/>
+            <text x="100" y="86" fill="#a8c4e0" font-size="7" text-anchor="middle">LEGAL</text>
+            <text x="100" y="97" fill="#a8c4e0" font-size="7" text-anchor="middle">PARTNER</text>
+            <line x1="122" y1="90" x2="142" y2="90" stroke="#2a4060" stroke-width="1.5"/>
+            <circle cx="164" cy="90" r="22" fill="#1a2d42" stroke="#2a5a8a" stroke-width="2"/>
+            <text x="164" y="86" fill="#a8c4e0" font-size="7" text-anchor="middle">INTAKE</text>
+            <text x="164" y="97" fill="#a8c4e0" font-size="7" text-anchor="middle">PROCESS</text>
+            <line x1="186" y1="90" x2="206" y2="90" stroke="#2a4060" stroke-width="1.5"/>
+            <circle cx="228" cy="90" r="22" fill="#1a2d42" stroke="#2a5a8a" stroke-width="2"/>
+            <text x="228" y="86" fill="#a8c4e0" font-size="7" text-anchor="middle">DEPLOY</text>
+            <text x="228" y="97" fill="#a8c4e0" font-size="7" text-anchor="middle">&amp; MAINT.</text>
+            <line x1="250" y1="90" x2="270" y2="90" stroke="#2a4060" stroke-width="1.5"/>
+            <circle cx="292" cy="90" r="22" fill="#1a2d42" stroke="#4a9a6a" stroke-width="2"/>
+            <text x="292" y="86" fill="#4a9a6a" font-size="7" text-anchor="middle">GO</text>
+            <text x="292" y="97" fill="#4a9a6a" font-size="7" text-anchor="middle">LIVE ✓</text>
+            <rect x="40" y="128" width="72" height="16" fill="#122030" rx="8" stroke="#2a4060" stroke-width="1"/>
+            <text x="76" y="140" fill="#6a8aaa" font-size="8" text-anchor="middle">IT Security ✓</text>
+            <rect x="124" y="128" width="76" height="16" fill="#122030" rx="8" stroke="#2a4060" stroke-width="1"/>
+            <text x="162" y="140" fill="#6a8aaa" font-size="8" text-anchor="middle">Procurement ✓</text>
+            <rect x="212" y="128" width="76" height="16" fill="#122030" rx="8" stroke="#4a9a6a" stroke-width="1"/>
+            <text x="250" y="140" fill="#4a9a6a" font-size="8" text-anchor="middle">Compliance ✓</text>
+            <rect x="10" y="14" width="130" height="18" fill="#1d0a0a" rx="4" stroke="#c8421a" stroke-width="1"/>
+            <text x="75" y="26" fill="#c8421a" font-size="9" text-anchor="middle" font-weight="600">Workshare → LiteraCompare</text>
+          </svg>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag blue">Application Lifecycle</span>
+          <span class="tag blue">Stakeholder Partnership</span>
+          <span class="tag gray">Enterprise Intake</span>
+        </div>
+        <h3 class="project-title">LiteraCompare — Full Lifecycle Deployment</h3>
+        <p class="project-org">NFL · Legal Department Partnership</p>
+        <p class="project-desc">When Litera acquired Workshare, the NFL's document comparison toolset faced an immediate end-of-life timeline. Identified the risk proactively, partnered with Legal as the primary stakeholder, and led the full new application intake and deployment process across multiple departments.</p>
+        <div class="project-outcomes">
+          <div class="outcome-stat"><div class="num">Proactive</div><div class="label">Risk identified early</div></div>
+          <div class="outcome-stat"><div class="num">4+ gates</div><div class="label">Dept approvals coordinated</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evercore Chatbot -->
+    <div class="project-card" onclick="openModal('chatbot')">
+      <div class="project-visual">
+        <div class="mockup-workflow">
+          <svg width="100%" height="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#0d1b2a" rx="8"/>
+            <!-- Knowledge graph nodes -->
+            <circle cx="160" cy="100" r="28" fill="#1a3a5c" stroke="#2a5a8a" stroke-width="2"/>
+            <text x="160" y="105" fill="#a8c4e0" font-size="10" text-anchor="middle" font-weight="bold">KB Core</text>
+            <!-- Connecting lines -->
+            <line x1="160" y1="72" x2="80" y2="40" stroke="#2a4060" stroke-width="1.5"/>
+            <line x1="160" y1="72" x2="240" y2="40" stroke="#2a4060" stroke-width="1.5"/>
+            <line x1="132" y1="110" x2="50" y2="130" stroke="#2a4060" stroke-width="1.5"/>
+            <line x1="188" y1="110" x2="270" y2="130" stroke="#2a4060" stroke-width="1.5"/>
+            <line x1="145" y1="124" x2="100" y2="165" stroke="#2a4060" stroke-width="1.5"/>
+            <line x1="175" y1="124" x2="220" y2="165" stroke="#2a4060" stroke-width="1.5"/>
+            <!-- Satellite nodes -->
+            <circle cx="80" cy="36" r="18" fill="#122030" stroke="#1a3a5a" stroke-width="1.5"/>
+            <text x="80" y="40" fill="#6a8aaa" font-size="8" text-anchor="middle">Policy</text>
+            <circle cx="240" cy="36" r="18" fill="#122030" stroke="#1a3a5a" stroke-width="1.5"/>
+            <text x="240" y="40" fill="#6a8aaa" font-size="8" text-anchor="middle">Catalog</text>
+            <circle cx="46" cy="132" r="18" fill="#122030" stroke="#c8421a" stroke-width="1.5"/>
+            <text x="46" y="136" fill="#e08060" font-size="8" text-anchor="middle">HR FAQ</text>
+            <circle cx="274" cy="132" r="18" fill="#122030" stroke="#1a3a5a" stroke-width="1.5"/>
+            <text x="274" y="136" fill="#6a8aaa" font-size="8" text-anchor="middle">ITSM</text>
+            <circle cx="100" cy="166" r="16" fill="#122030" stroke="#4a7a4a" stroke-width="1.5"/>
+            <text x="100" y="170" fill="#4a9a6a" font-size="8" text-anchor="middle">Gap ✓</text>
+            <circle cx="220" cy="166" r="16" fill="#122030" stroke="#1a3a5a" stroke-width="1.5"/>
+            <text x="220" y="170" fill="#6a8aaa" font-size="8" text-anchor="middle">Fin.</text>
+            <!-- Status badge -->
+            <rect x="10" y="10" width="80" height="18" fill="#c8421a" rx="9"/>
+            <text x="50" y="22" fill="white" font-size="9" text-anchor="middle" font-weight="600">IN PROGRESS</text>
+          </svg>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">In Progress</span>
+          <span class="tag blue">AI Governance</span>
+          <span class="tag gray">Compliance Policy</span>
+        </div>
+        <h3 class="project-title">Chatbot & Knowledge Base Enhancement</h3>
+        <p class="project-org">Evercore · Regulated Financial Services</p>
+        <p class="project-desc">Auditing and enhancing the Evercore Virtual Agent to achieve full knowledge base compliance — resolving index gaps, aligning chatbot response logic to approved source material, and building a governance framework for sustainable long-term maintenance in a regulated environment.</p>
+        <div class="project-outcomes">
+          <div class="outcome-stat"><div class="num">80%</div><div class="label">VA effectiveness roadmapped</div></div>
+          <div class="outcome-stat"><div class="num">Regulated</div><div class="label">FS environment</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MusicNow -->
+    <div class="project-card" onclick="openModal('musicnow')">
+      <div class="project-visual">
+        <div class="mockup-app">
+          <svg width="100%" height="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#1a0a0a" rx="8"/>
+            <!-- Album art placeholder -->
+            <rect x="20" y="20" width="80" height="80" fill="#2d1515" rx="8"/>
+            <circle cx="60" cy="60" r="24" fill="#3d2020" stroke="#c8421a" stroke-width="2"/>
+            <circle cx="60" cy="60" r="8" fill="#c8421a"/>
+            <!-- Waveform -->
+            <rect x="116" y="50" width="3" height="20" fill="#c8421a" rx="2" opacity="0.6"/>
+            <rect x="124" y="40" width="3" height="40" fill="#c8421a" rx="2" opacity="0.8"/>
+            <rect x="132" y="45" width="3" height="30" fill="#c8421a" rx="2" opacity="0.9"/>
+            <rect x="140" y="35" width="3" height="50" fill="#c8421a" rx="2"/>
+            <rect x="148" y="42" width="3" height="36" fill="#c8421a" rx="2" opacity="0.9"/>
+            <rect x="156" y="38" width="3" height="44" fill="#c8421a" rx="2" opacity="0.8"/>
+            <rect x="164" y="46" width="3" height="28" fill="#c8421a" rx="2" opacity="0.7"/>
+            <rect x="172" y="52" width="3" height="16" fill="#c8421a" rx="2" opacity="0.5"/>
+            <rect x="180" y="48" width="3" height="24" fill="#c8421a" rx="2" opacity="0.6"/>
+            <!-- Track info -->
+            <rect x="116" y="24" width="100" height="8" fill="#3d2020" rx="4"/>
+            <rect x="116" y="36" width="70" height="6" fill="#2d1515" rx="3"/>
+            <!-- Discover panel -->
+            <rect x="20" y="116" width="280" height="64" fill="#200d0d" rx="8"/>
+            <rect x="30" y="126" width="60" height="6" fill="#3d2020" rx="3"/>
+            <!-- AI recommendation chips -->
+            <rect x="30" y="142" width="58" height="22" fill="#c8421a" rx="11" opacity="0.8"/>
+            <text x="59" y="157" fill="white" font-size="9" text-anchor="middle">Jazz Fusion</text>
+            <rect x="96" y="142" width="62" height="22" fill="#2d1515" rx="11" stroke="#c8421a" stroke-width="1"/>
+            <text x="127" y="157" fill="#c8421a" font-size="9" text-anchor="middle">Lo-fi beats</text>
+            <rect x="166" y="142" width="54" height="22" fill="#2d1515" rx="11" stroke="#c8421a" stroke-width="1"/>
+            <text x="193" y="157" fill="#c8421a" font-size="9" text-anchor="middle">Ambient</text>
+            <!-- Status -->
+            <rect x="240" y="14" width="70" height="18" fill="#1d0a0a" rx="4" stroke="#c8421a" stroke-width="1"/>
+            <circle cx="250" cy="23" r="4" fill="#c8421a">
+              <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="275" y="27" fill="#c8421a" font-size="9" text-anchor="middle">Building</text>
+          </svg>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Personal Project</span>
+          <span class="tag blue">Agentic AI</span>
+          <span class="tag gray">Full Lifecycle</span>
+        </div>
+        <h3 class="project-title">MusicNow — AI-Powered ServiceNow App</h3>
+        <p class="project-org">Independent · In Development</p>
+        <p class="project-desc">Architecting an end-to-end AI-powered ServiceNow application integrating Virtual Agent, Generative/Agentic AI, and external APIs for conversational music discovery and automated fulfillment. Demonstrates full product lifecycle skills: concept, architecture, API design, and AI orchestration — without a client or a template.</p>
+        <div class="project-outcomes">
+          <div class="outcome-stat"><div class="num">0→1</div><div class="label">Built from scratch</div></div>
+          <div class="outcome-stat"><div class="num">Agentic AI</div><div class="label">Core architecture</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Syriac Institute -->
+    <div class="project-card" onclick="openModal('syriac')" style="border: 2px solid var(--accent); position: relative;">
+      <div style="position:absolute; top: -12px; left: 24px; background: var(--accent); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; z-index:2;">Most Proud</div>
+      <div class="project-visual">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1a10 0%,#122010 100%);display:flex;align-items:center;justify-content:center;padding:20px;">
+          <svg width="100%" height="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#0d1a10" rx="8"/>
+            <rect x="30" y="20" width="110" height="160" fill="#1a2a1a" rx="4" stroke="#2a4a2a" stroke-width="1"/>
+            <path d="M42 45 Q60 42 78 46 Q96 50 108 44 Q120 40 130 45" stroke="#3a6a3a" stroke-width="1.5" fill="none"/>
+            <path d="M42 58 Q55 55 72 59 Q90 63 108 57 Q122 53 130 58" stroke="#3a6a3a" stroke-width="1.5" fill="none"/>
+            <path d="M42 71 Q58 68 76 72 Q94 76 112 70 Q124 66 130 71" stroke="#3a5a3a" stroke-width="1.2" fill="none"/>
+            <path d="M42 84 Q62 81 80 85 Q98 89 116 83 Q126 79 130 84" stroke="#3a5a3a" stroke-width="1.2" fill="none"/>
+            <path d="M42 97 Q56 94 74 98 Q92 102 110 96 Q123 92 130 97" stroke="#2a4a2a" stroke-width="1" fill="none"/>
+            <path d="M42 110 Q60 107 78 111 Q96 115 114 109 Q125 105 130 110" stroke="#2a4a2a" stroke-width="1" fill="none"/>
+            <path d="M42 123 Q58 120 76 124 Q94 128 112 122 Q124 118 130 123" stroke="#2a4a2a" stroke-width="1" fill="none"/>
+            <path d="M42 136 Q62 133 80 137 Q98 141 116 135 Q127 131 130 136" stroke="#2a4a2a" stroke-width="1" fill="none"/>
+            <rect x="30" y="88" width="110" height="3" fill="#4a9a4a" opacity="0.5">
+              <animate attributeName="y" values="20;172;20" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <path d="M152 100 L172 100" stroke="#4a7a4a" stroke-width="2" marker-end="url(#garrow2)"/>
+            <defs>
+              <marker id="garrow2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L6,3 z" fill="#4a7a4a"/>
+              </marker>
+            </defs>
+            <rect x="178" y="20" width="114" height="160" fill="#122018" rx="4" stroke="#2a4a2a" stroke-width="1"/>
+            <rect x="186" y="30" width="98" height="10" fill="#1e3a20" rx="2"/>
+            <rect x="186" y="48" width="60" height="5" fill="#3a7a3a" rx="2" opacity="0.9"/>
+            <rect x="186" y="58" width="80" height="5" fill="#3a7a3a" rx="2" opacity="0.8"/>
+            <rect x="186" y="68" width="50" height="5" fill="#3a7a3a" rx="2" opacity="0.9"/>
+            <rect x="186" y="78" width="70" height="5" fill="#3a7a3a" rx="2" opacity="0.7"/>
+            <rect x="186" y="88" width="65" height="5" fill="#4a9a4a" rx="2" opacity="1"/>
+            <rect x="186" y="98" width="55" height="5" fill="#3a7a3a" rx="2" opacity="0.8"/>
+            <rect x="186" y="108" width="75" height="5" fill="#3a7a3a" rx="2" opacity="0.7"/>
+            <rect x="186" y="118" width="45" height="5" fill="#3a7a3a" rx="2" opacity="0.9"/>
+            <rect x="186" y="128" width="68" height="5" fill="#3a7a3a" rx="2" opacity="0.8"/>
+            <rect x="190" y="152" width="40" height="14" fill="#0d2010" rx="3" stroke="#3a7a3a" stroke-width="1"/>
+            <text x="210" y="163" fill="#4a9a4a" font-size="8" text-anchor="middle">&lt;xml/&gt;</text>
+            <rect x="238" y="152" width="46" height="14" fill="#0d2010" rx="3" stroke="#4a9a4a" stroke-width="1"/>
+            <text x="261" y="163" fill="#4a9a4a" font-size="8" text-anchor="middle">OCR ✓</text>
+          </svg>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Most Proud</span>
+          <span class="tag blue">AI Model Training</span>
+          <span class="tag gray">International Research</span>
+        </div>
+        <h3 class="project-title">Syriac Language OCR Model</h3>
+        <p class="project-org">Beth Mardutho: The Syriac Institute · Piscataway, NJ</p>
+        <p class="project-desc">Contributed to an international research team building an OCR and handwritten text recognition AI model for ancient Syriac manuscripts — one of the world’s least-digitized language traditions. Coded 20+ articles in XML to structure training data, then authored the research report that secured organizational buy-in for continued development.</p>
+        <div class="project-outcomes">
+          <div class="outcome-stat"><div class="num">20+</div><div class="label">Articles XML-coded</div></div>
+          <div class="outcome-stat"><div class="num">75-pg</div><div class="label">Report secured funding</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-label">How I Work</p>
+  <h2 class="section-title">A practitioner's approach to product.</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Discover</div>
+      <div class="step-desc">Deep stakeholder interviews. Workflow shadowing. Finding the gap between what people say they need and what the system actually does.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Define</div>
+      <div class="step-desc">Translating discovery into precise requirements — functional, technical, and governance. Prioritized by impact and feasibility, not intuition.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Build</div>
+      <div class="step-desc">Hands-on collaboration with engineering. I can read a business rule, trace an API call, and ask the right questions when something's off.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Validate</div>
+      <div class="step-desc">UAT that actually tests the use case, not just the spec. Data quality checks. Edge cases that only practitioners think to try.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">5</div>
+      <div class="step-title">Adopt</div>
+      <div class="step-desc">A shipped feature no one uses is a failed product. Training, change management, and executive buy-in are part of the deliverable.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <blockquote>
+    "The best AI products aren't impressive demos — they're the ones that <em>change how work gets done</em> the day after launch."
+  </blockquote>
+  <cite>— Matt Bachman, on what he's building toward</cite>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="label">Let's talk</div>
+    <h2>Available for<br>the right role.</h2>
+    <a href="mailto:mbachman1196@gmail.com" class="cta-btn">Get in Touch</a>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:mbachman1196@gmail.com">mbachman1196@gmail.com</a>
+    <a href="https://linkedin.com/in/gotomattbachman" target="_blank">linkedin.com/in/gotomattbachman</a>
+    <a href="tel:6185200100">618-520-0100</a>
+    <span style="color: var(--rule); font-size: 13px; margin-top: 8px;">New York, NY</span>
+  </div>
+</section>
+
+<!-- PROJECT MODALS -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <div id="modal-inner"></div>
+  </div>
+</div>
+
+<script>
+const projects = {
+  copilot: {
+    tags: ['<span class="tag">Featured Project</span>', '<span class="tag blue">AI Integration</span>', '<span class="tag blue">Agile Delivery</span>'],
+    title: "Enterprise AI Workflow",
+    org: "NFL · New York, NY",
+    overview: "The NFL's enterprise IT environment serves over 6,000 users — from league office staff to stadium operations. When the organization decided to modernize its service desk with AI-driven workflows, I was brought in as the platform analyst to identify a solution.",
+    role: [
+      "Scoped and defined requirements for a Microsoft Copilot virtual agent powered by Generative AI integrated with ServiceNow, working with engineering and business stakeholders to validate feasibility and align on a POC roadmap",
+      "Curated and refined the knowledge base powering the virtual agent — structuring content to reduce tier 1 incident volume by enabling accurate self-service resolution before tickets were ever created",
+      "Ran Agile delivery for the POC: managed backlog, facilitated cross-functional alignment, and resolved integration conflicts mid-sprint — producing a working proof of concept that demonstrated measurable deflection potential",
+      "Developed training materials and conducted demos for technical and non-technical stakeholders, building organizational confidence in the solution and laying the groundwork for a future production rollout"
+    ],
+    outcomes: [
+      { num: "6,000+", label: "Users across the platform" },
+      { num: "↓ Manual", label: "Effort across departments" },
+      { num: "Full cycle", label: "Discovery → go-live" }
+    ],
+    reflection: ""
+  },
+  litera: {
+    tags: ['<span class="tag blue">Application Lifecycle</span>', '<span class="tag blue">Stakeholder Partnership</span>', '<span class="tag gray">Enterprise Intake</span>'],
+    title: "LiteraCompare — Full Lifecycle Deployment",
+    org: "NFL · Legal Department Partnership",
+    overview: "When Litera acquired Workshare, the NFL's existing document comparison toolset faced an immediate end-of-life timeline. I identified the risk early and initiated the process to evaluate LiteraCompare as the replacement, partnering with the Legal department as the primary stakeholder and business owner throughout.",
+    role: [
+      "Identified the business risk created by the Litera–Workshare acquisition and proactively flagged the dependency to IT leadership and Legal",
+      "Partnered with the Legal department to define requirements, document use cases, and serve as their internal advocate through every stage of the intake and approval process",
+      "Led the formal new application intake process — coordinating sign-off across IT Security, Procurement, Compliance, and Legal — managing the review timeline and resolving blockers at each gate",
+      "Defined and documented the full deployment and maintenance schedule: rollout sequencing, user communication plan, training delivery for Legal staff, and ongoing support ownership post-go-live"
+    ],
+    outcomes: [
+      { num: "Proactive", label: "Risk identified before escalation" },
+      { num: "4+ gates", label: "Dept approvals coordinated" },
+      { num: "Full lifecycle", label: "Intake through maintenance" }
+    ],
+    reflection: ""
+  },
+  chatbot: {
+    tags: ['<span class="tag">In Progress</span>', '<span class="tag blue">AI Governance</span>', '<span class="tag gray">Compliance Policy</span>'],
+    title: "Chatbot & Knowledge Base Enhancement",
+    org: "Evercore · Regulated Financial Services",
+    overview: "Evercore's Virtual Agent was live but underperforming — hallucinating answers, failing to properly submit tickets, and drifting from approved knowledge base content in ways that created compliance exposure in a heavily regulated financial services environment.",
+    role: [
+      "Conducting a systematic audit of the chatbot's indexed content against the master knowledge base — identifying where response logic has drifted from approved source material",
+      "Resolving index gaps: mapping which topics have no indexed content, which have outdated content, and which are producing responses unsupported by approved material — building the foundation for an Agentic AI agent",
+      "Drafting a governance framework: policies for knowledge base maintenance cycles, approval workflows for new content, and audit triggers for post-deployment drift",
+      "Documenting a strategic roadmap projecting an 80% improvement in catalog request handling effectiveness once the framework is fully implemented"
+    ],
+    outcomes: [
+      { num: "80%", label: "VA effectiveness roadmapped" },
+      { num: "Compliance", label: "Policy framework in progress" },
+      { num: "Regulated", label: "FS environment" }
+    ],
+    reflection: ""
+  },
+  musicnow: {
+    tags: ['<span class="tag">Personal Project</span>', '<span class="tag blue">Agentic AI</span>', '<span class="tag gray">Full Lifecycle</span>'],
+    title: "MusicNow — AI-Powered ServiceNow Application",
+    org: "Independent Project",
+    overview: "MusicNow is a personal proof-of-concept I'm building to demonstrate full product lifecycle skills outside of a client context. The concept: a ServiceNow application where a Virtual Agent uses conversational AI to understand a user's mood, context, and preferences, then orchestrates API calls to discover and fulfill music recommendations.",
+    role: [
+      "Designed the product architecture: Virtual Agent conversation flows, Generative AI integration for intent classification, and REST API orchestration for music service fulfillment",
+      "Built the data model in ServiceNow to store user preferences, session context, and fulfillment history — enabling personalization over time",
+      "Researching Agentic AI patterns where the system autonomously takes multi-step actions (discover → evaluate → recommend → fulfill) without a human in the loop at each step",
+      "Documenting the architecture, design decisions, and technical tradeoffs as a portfolio artifact — demonstrating the ability to think through a product end-to-end"
+    ],
+    outcomes: [
+      { num: "0→1", label: "Built from scratch" },
+      { num: "Agentic", label: "AI architecture" },
+      { num: "Full stack", label: "Design + build + doc" }
+    ],
+    reflection: ""
+  },
+  syriac: {
+    tags: ['<span class="tag">Most Proud</span>', '<span class="tag blue">AI Model Training</span>', '<span class="tag gray">International Research</span>'],
+    title: "Syriac Language OCR Model",
+    org: "Beth Mardutho: The Syriac Institute · Piscataway, NJ",
+    overview: "This is the project I'm most proud of. Not because it was the largest or the most technically complex — but because it mattered in a way that's hard to quantify. Beth Mardutho is one of the only institutions in the world working to digitize ancient Syriac manuscripts, a language tradition with thousands of handwritten texts that have never been machine-readable. I joined an international research team building the OCR and handwritten text recognition model that could change that.",
+    role: [
+      "Coded 20+ scholarly articles in XML to create precisely structured training data — learning the annotation schema from scratch and applying it with the accuracy a machine learning model depends on",
+      "Worked within an international team of linguists, historians, and technologists — bridging the gap between domain expertise and the structured data format the AI model required",
+      "Researched and documented manuscript digitization workflows for future automation opportunities — analyzing the end-to-end process to identify where AI-driven tools could scale the work beyond manual annotation",
+      "Authored a 75-page research report synthesizing the team's methodology, findings, and development roadmap — written specifically to secure organizational and stakeholder buy-in for continued model development"
+    ],
+    outcomes: [
+      { num: "20+", label: "Articles XML-coded for training" },
+      { num: "75 pages", label: "Report secured continued funding" },
+      { num: "International", label: "Cross-disciplinary team" }
+    ],
+    reflection: ""
+  }
+};
+
+function openModal(id) {
+  const p = projects[id];
+  const inner = document.getElementById('modal-inner');
+  inner.innerHTML = `
+    <div class="modal-tag">${p.tags.join(' ')}</div>
+    <h2 class="modal-title">${p.title}</h2>
+    <p class="modal-org">${p.org}</p>
+    <div class="modal-section-head">Overview</div>
+    <div class="modal-body"><p>${p.overview}</p></div>
+    <div class="modal-section-head">My Role</div>
+    <div class="modal-body"><ul>${p.role.map(r => `<li>${r}</li>`).join('')}</ul></div>
+    <div class="modal-outcomes">${p.outcomes.map(o => `<div class="modal-outcome-stat"><div class="num">${o.num}</div><div class="label">${o.label}</div></div>`).join('')}</div>
+    ${p.reflection ? `<div class="modal-section-head">Reflection</div><div class="modal-body"><p><em>${p.reflection}</em></p></div>` : ""}
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeAllModals();
+}
+function closeAllModals() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
+
+// Scroll animation for process steps
+const steps = document.querySelectorAll('.process-step');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+    }
+  });
+}, { threshold: 0.2 });
+
+steps.forEach((step, i) => {
+  step.dataset.delay = i * 120;
+  observer.observe(step);
+});
+</script>
+</body>
+</html>
