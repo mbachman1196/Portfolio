@@ -692,7 +692,7 @@
     .about-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .project-card.featured { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .process-steps { grid-template-columns: 1fr; gap: 24px; }
     .process-steps::before { display: none; }
     .contact { flex-direction: column; gap: 40px; align-items: flex-start; }
     .contact-links { text-align: left; }
@@ -700,6 +700,16 @@
     nav .nav-links { display: none; }
     .hero-bg-text { font-size: 80px; }
     .hero-title { font-size: 42px; }
+    .hero-sub { font-size: 16px; }
+    .section-title { font-size: 36px; }
+    .project-title { font-size: 20px; }
+    .project-desc { font-size: 14px; }
+    .project-outcomes { flex-direction: column; gap: 16px; }
+    .modal { padding: 32px 24px; width: 95%; }
+    .modal-title { font-size: 24px; }
+    .modal-outcomes { flex-direction: column; gap: 16px; }
+    .philosophy blockquote { font-size: 24px; }
+    .about-text { font-size: 16px; }
   }
 </style>
 </head>
@@ -1016,7 +1026,7 @@
 
     <!-- Syriac Institute -->
     <div class="project-card" onclick="openModal('syriac')" style="position: relative;">
-      <div style="position:absolute; top: -12px; left: 24px; background: var(--accent); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; z-index:2;">Most Proud</div>
+
       <div class="project-visual">
         <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1a10 0%,#122010 100%);display:flex;align-items:center;justify-content:center;padding:20px;">
           <svg width="100%" height="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
